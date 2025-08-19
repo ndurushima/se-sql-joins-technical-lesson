@@ -40,3 +40,29 @@ SELECT *
  LIMIT 10;
 """
 print(pd.read_sql(q, conn))
+
+
+# The following query produces the same result as the previous ones, using aliases od and p for orderdetails and products, respectively:
+q = """
+SELECT *
+ FROM orderdetails AS od
+   JOIN products AS p
+     ON od.productCode = p.productCode
+ LIMIT 10;
+"""
+print(pd.read_sql(q, conn))
+
+
+# select all records from products and join them with all records in orderdetails on productcode using LEFT JOIN, then execute the query and store it in a dataframe named df:
+q = """
+SELECT *
+ FROM products
+   LEFT JOIN orderdetails
+     USING(productCode);
+"""
+df = pd.read_sql(q, conn)
+
+print("Number of records returned:", len(df))
+print("Number of records where order details are null:", len(df[df.orderNumber.isnull()]))
+
+print(df[df.orderNumber.isnull()])
