@@ -29,3 +29,14 @@ SELECT *
  LIMIT 10;
 """
 print(pd.read_sql(q, conn))
+
+
+# select all records in orderdetails and products and join them on productCode with the USING() clause, and return the first 10 records:
+q = """
+SELECT *
+ FROM orderdetails
+   JOIN products
+     USING(productCode)
+ LIMIT 10;
+"""
+print(pd.read_sql(q, conn))
