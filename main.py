@@ -66,3 +66,16 @@ print("Number of records returned:", len(df))
 print("Number of records where order details are null:", len(df[df.orderNumber.isnull()]))
 
 print(df[df.orderNumber.isnull()])
+
+
+#join customers using the alias c with employees using the alias e on the foreign keys salesRepEmployeeNumber and employeeNumber, and order the result by employeeNumber, then type the code to execute the query:
+q = """
+SELECT *
+ FROM customers AS c
+      JOIN employees AS e
+      ON c.salesRepEmployeeNumber = e.employeeNumber
+      ORDER By employeeNumber;
+"""
+print(pd.read_sql(q, conn))
+
+conn.close()
